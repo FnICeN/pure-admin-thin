@@ -35,6 +35,24 @@ const permissionRouter = {
   ]
 };
 
+const testRouter = {
+  path: "/test",
+  meta: {
+    title: "测试页面",
+    icon: "lollipop",
+    rank: 20
+  },
+  children: [
+    {
+      path: "/test/demo",
+      name: "TestPage",
+      meta: {
+        title: "测试"
+      }
+    }
+  ]
+};
+
 export default [
   {
     url: "/getAsyncRoutes",
@@ -42,7 +60,7 @@ export default [
     response: () => {
       return {
         success: true,
-        data: [permissionRouter]
+        data: [permissionRouter, testRouter]
       };
     }
   }
