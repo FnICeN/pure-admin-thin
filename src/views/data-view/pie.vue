@@ -31,16 +31,16 @@ setOptions(
     },
     series: [
       {
-        name: "信息",
+        name: "情感倾向",
         type: "pie",
-        top: "20%",
+        top: "10%",
         radius: "80%",
         center: ["40%", "50%"],
         data: [
-          { value: 20000, name: "apple" },
-          { value: 66666, name: "banana" },
-          { value: 10000, name: "grape" },
-          { value: 1000, name: "orange" }
+          { value: 20000, name: "积极" },
+          // { value: 66666, name: "banana" },
+          { value: 10000, name: "消极" }
+          // { value: 1000, name: "orange" }
         ],
         emphasis: {
           itemStyle: {

@@ -19,6 +19,10 @@ const { setOptions, resize } = useECharts(lineChartRef as Ref<HTMLDivElement>, {
   theme
 });
 
+// const { setOptions, resize, getOption, getInstance } = useECharts(lineChartRef as Ref<HTMLDivElement>, {
+//   theme
+// });
+
 const data = [
   ["2023/1/1", 100, 20],
   ["2023/1/2", 121, 25],
@@ -45,6 +49,15 @@ const getNegValueList = () => {
 
 // const add = () => {
 //   data.push(["2023/1/6", 288, 67])
+//   var option = getOption()
+//   option.xAxis = {
+//     type: "category",
+//     data: getDateList(),
+//     axisTick: { alignWithLabel: true }
+//   }
+//   option.series[0].data = getPosValueList()
+//   option.series[1].data = getNegValueList()
+//   getInstance().setOption(option, true)
 // }
 
 setOptions({
@@ -63,13 +76,13 @@ setOptions({
   },
   series: [
     {
-      name: "positive",
+      name: "积极",
       data: getPosValueList(),
       type: "line",
       smooth: true
     },
     {
-      name: "negative",
+      name: "消极",
       data: getNegValueList(),
       type: "line",
       smooth: true
@@ -88,6 +101,7 @@ watch(
 <template>
   <div>
     <div ref="lineChartRef" style="width: 100%; height: 35vh" />
+    <!-- <button @click="add">clickme</button> -->
   </div>
 </template>
 

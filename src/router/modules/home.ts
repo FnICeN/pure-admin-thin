@@ -13,7 +13,7 @@ export default {
   children: [
     {
       path: "/welcome",
-      name: "Welcome",
+      name: "Data-view",
       // component: () => import("@/views/welcome/index.vue"),
       component: () => import("@/views/data-view/index.vue"),
       meta: {

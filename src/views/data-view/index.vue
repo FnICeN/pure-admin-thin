@@ -1,47 +1,64 @@
 <script setup lang="ts">
 import Pie from "../data-view/pie.vue";
 import Line from "../data-view/line.vue";
+import Tab from "../data-view/table.vue";
+defineOptions({
+  name: "Data-view"
+});
 </script>
 
 <template>
-  <el-row :gutter="20">
-    <el-col :span="6">
-      <div class="grid-content bg-purple">
-        <el-card class="box-card">
-          <!-- eslint-disable-next-line -->
-          <template v-slot="header">
+  <div>
+    <el-row :gutter="20">
+      <el-col :span="24">
+        <el-card class="box-card" style="margin-top: 10px; height: 480px">
+          <template #header>
             <div class="clearfix text">
-              <span>舆情综合比例</span>
+              <span>舆情数据</span>
             </div>
+          </template>
+          <Tab />
+        </el-card>
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :span="12">
+        <div class="grid-content bg-purple">
+          <el-card class="box-card">
+            <!-- eslint-disable-next-line -->
+            <template #header>
+              <div class="clearfix text">
+                <span>舆情综合比例</span>
+              </div>
+            </template>
             <div class="item">
               <Pie />
             </div>
-          </template>
-        </el-card>
-      </div>
-    </el-col>
-    <el-col :span="6">
-      <div class="grid-content bg-purple">
-        <el-card class="box-card">
-          <!-- eslint-disable-next-line -->
-          <template v-slot="header">
-            <div class="clearfix text">
-              <span>舆情综合走向</span>
-            </div>
+          </el-card>
+        </div>
+      </el-col>
+      <el-col :span="12">
+        <div class="grid-content bg-purple">
+          <el-card class="box-card">
+            <!-- eslint-disable-next-line -->
+            <template #header>
+              <div class="clearfix text">
+                <span>舆情综合走向</span>
+              </div>
+            </template>
             <div class="item">
               <Line />
             </div>
-          </template>
-        </el-card>
-      </div>
-    </el-col>
-  </el-row>
+          </el-card>
+        </div>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
-<style>
+<style scoped>
 .text {
   font-size: 20px;
-  padding-bottom: 20px;
 }
 
 .item {
@@ -59,13 +76,13 @@ import Line from "../data-view/line.vue";
 }
 
 .box-card {
-  width: 480px;
   margin-left: 20px;
+  margin-right: 20px;
 }
 
 /* 表格布局 */
 .el-row {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .el-col {

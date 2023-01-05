@@ -45,7 +45,7 @@ const testRouter = {
   children: [
     {
       path: "/test/demo",
-      name: "TestPage",
+      name: "Test",
       meta: {
         title: "测试"
       }
