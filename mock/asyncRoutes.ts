@@ -12,7 +12,8 @@ const permissionRouter = {
   meta: {
     title: "权限管理",
     icon: "lollipop",
-    rank: 10
+    rank: 10,
+    showLink: false
   },
   children: [
     {
@@ -35,24 +36,6 @@ const permissionRouter = {
   ]
 };
 
-const testRouter = {
-  path: "/test",
-  meta: {
-    title: "测试页面",
-    icon: "lollipop",
-    rank: 20
-  },
-  children: [
-    {
-      path: "/test/demo",
-      name: "Test",
-      meta: {
-        title: "测试"
-      }
-    }
-  ]
-};
-
 export default [
   {
     url: "/getAsyncRoutes",
@@ -60,7 +43,7 @@ export default [
     response: () => {
       return {
         success: true,
-        data: [permissionRouter, testRouter]
+        data: [permissionRouter]
       };
     }
   }
