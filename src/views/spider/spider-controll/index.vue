@@ -1,11 +1,45 @@
 <script setup lang="ts">
+import Form from "./form.vue";
+
 defineOptions({
   name: "spider-controll"
 });
 </script>
 
 <template>
-  <div>spider-controll爬虫控制界面</div>
+  <div>
+    <el-card class="box-card">
+      <template #header>
+        <div class="clearfix text">
+          <span>爬虫参数管理</span>
+        </div>
+      </template>
+      <Form />
+    </el-card>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.text {
+  font-size: 20px;
+}
+
+.item {
+  margin-bottom: 18px;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.box-card {
+  width: 60%;
+  margin-left: 20%;
+}
+</style>

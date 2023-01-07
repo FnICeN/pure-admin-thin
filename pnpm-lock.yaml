@@ -31,6 +31,7 @@ specifiers:
   cssnano: ^5.1.14
   dayjs: ^1.11.6
   echarts: ^5.4.0
+  element-china-area-data: ^5.0.2
   element-plus: ^2.2.27
   element-resize-detector: ^1.2.4
   eslint: ^8.8.0
@@ -90,6 +91,7 @@ dependencies:
   axios: 1.2.1
   dayjs: 1.11.7
   echarts: 5.4.1
+  element-china-area-data: 5.0.2
   element-plus: 2.2.27_vue@3.2.45
   element-resize-detector: 1.2.4
   js-cookie: 3.0.1
@@ -2564,6 +2566,13 @@ packages:
       supports-color: 7.2.0
     dev: true
 
+  /china-area-data/5.0.1:
+    resolution:
+      {
+        integrity: sha512-BQDPpiv5Nn+018ekcJK2oSD9PAD+E1bvXB0wgabc//dFVS/KvRqCgg0QOEUt3vBkx9XzB5a9BmkJCEZDBxVjVw==
+      }
+    dev: false
+
   /chokidar/3.5.3:
     resolution:
       {
@@ -3315,6 +3324,16 @@ packages:
         integrity: sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==
       }
     dev: true
+
+  /element-china-area-data/5.0.2:
+    resolution:
+      {
+        integrity: sha512-vLQuvOKJy/uiX7MRHEk3x/j09hipuIl6DJ/C4XFUG7D7Pj3O47sy+Y6aAArM6k9v8cD9UX6e+yz2S4J+IPnZ8g==
+      }
+    dependencies:
+      china-area-data: 5.0.1
+      lodash-es: 4.17.21
+    dev: false
 
   /element-plus/2.2.27_vue@3.2.45:
     resolution:
