@@ -21,6 +21,9 @@ import "element-plus/dist/index.css";
 // 导入字体图标
 import "./assets/iconfont/iconfont.js";
 import "./assets/iconfont/iconfont.css";
+//FICN的iconfont图标素材库
+import "./assets/iconfont-bussiness/iconfont.css";
+import "./assets/iconfont-bussiness/iconfont.js";
 
 const app = createApp(App);
 
