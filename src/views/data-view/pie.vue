@@ -19,6 +19,11 @@ const { setOptions, resize } = useECharts(pieChartRef as Ref<HTMLDivElement>, {
   theme
 });
 
+const data = {
+  pos: 20000,
+  neg: 10000
+};
+
 setOptions(
   {
     tooltip: {
@@ -37,9 +42,9 @@ setOptions(
         radius: "80%",
         center: ["40%", "50%"],
         data: [
-          { value: 20000, name: "积极" },
+          { value: data.pos, name: "积极" },
           // { value: 66666, name: "banana" },
-          { value: 10000, name: "消极" }
+          { value: data.neg, name: "消极" }
           // { value: 1000, name: "orange" }
         ],
         emphasis: {

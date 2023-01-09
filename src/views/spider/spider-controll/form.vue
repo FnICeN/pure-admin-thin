@@ -4,6 +4,8 @@ import { provinceAndCityData, CodeToText } from "element-china-area-data";
 import { subBefore } from "@pureadmin/utils";
 import { formatDate } from "@vueuse/core";
 
+const activeName = "";
+
 const spiderSets = ref({
   keywords: [{ value: "", key: Date.now() }],
   weiboType: 0,
@@ -13,7 +15,11 @@ const spiderSets = ref({
   date_end: "",
   threshold: 40,
   delay: 2,
-  desc: ""
+  desc: "",
+  higherSets: {
+    CONCURRENT_REQUESTS: 40,
+    REACTOR_THREADPOOL_MAXSIZE: 500
+  }
 });
 
 const tempregions = ref([[""]]);
@@ -82,7 +88,11 @@ const onCancel = () => {
     date_end: "",
     threshold: 40,
     delay: 2,
-    desc: ""
+    desc: "",
+    higherSets: {
+      CONCURRENT_REQUESTS: 40,
+      REACTOR_THREADPOOL_MAXSIZE: 500
+    }
   };
   //regions复位
   spiderSets.value.regions = [];
@@ -182,6 +192,35 @@ const onCancel = () => {
     <el-form-item label="爬取备注">
       <el-input type="textarea" v-model="spiderSets.desc" />
     </el-form-item>
+
+    <el-collapse v-model="activeName">
+      <el-collapse-item name="1" title="高级设置">
+        <el-form
+          :model="spiderSets"
+          label-width="150px"
+          style="margin-right: 200px"
+        >
+          <el-form-item label="同时发送请求数">
+            <el-input-number
+              v-model="spiderSets.higherSets.CONCURRENT_REQUESTS"
+              :min="1"
+              :max="60"
+              label="阈值"
+            />
+          </el-form-item>
+          <el-form-item label="线程池线程数">
+            <el-input-number
+              v-model="spiderSets.higherSets.REACTOR_THREADPOOL_MAXSIZE"
+              :min="300"
+              :max="600"
+              :step="10"
+              label="阈值"
+            />
+          </el-form-item>
+        </el-form>
+      </el-collapse-item>
+    </el-collapse>
+
     <el-form-item>
       <el-button type="primary" @click="onSubmit">开始任务</el-button>
       <el-button @click="onCancel">取消</el-button>
@@ -189,4 +228,16 @@ const onCancel = () => {
   </el-form>
 </template>
 
-<style scoped></style>
+<style scoped>
+.el-collapse {
+  --el-collapse-border-color: none;
+  --el-collapse-header-font-size: 20px;
+  --el-collapse-header-text-color: #409eff;
+  margin-bottom: 20px;
+}
+
+::v-deep .el-collapse-item__content {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+</style>
