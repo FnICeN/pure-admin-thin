@@ -12,6 +12,7 @@ export default {
       name: "Spider-general",
       component: () => import("@/views/spider/spider-general/index.vue"),
       meta: {
+        icon: "watch",
         title: "爬虫总览"
       }
     },
@@ -20,6 +21,7 @@ export default {
       name: "spider-controll",
       component: () => import("@/views/spider/spider-controll/index.vue"),
       meta: {
+        icon: "setup",
         title: "爬虫控制"
       }
     }

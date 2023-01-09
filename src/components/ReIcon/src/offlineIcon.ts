@@ -9,8 +9,18 @@ import HomeFilled from "@iconify-icons/ep/home-filled";
 import InformationLine from "@iconify-icons/ri/information-line";
 import Lollipop from "@iconify-icons/ep/lollipop";
 import Aim from "@iconify-icons/ep/aim";
+import Setting from "@iconify-icons/ep/setting";
+import Watch from "@iconify-icons/ep/stopwatch";
+import Setup from "@iconify-icons/ep/set-up";
+import User from "@iconify-icons/ep/user";
+import Role from "@iconify-icons/ri/admin-fill";
 
 addIcon("homeFilled", HomeFilled);
 addIcon("informationLine", InformationLine);
 addIcon("lollipop", Lollipop);
 addIcon("aim", Aim);
+addIcon("setting", Setting);
+addIcon("watch", Watch);
+addIcon("setup", Setup);
+addIcon("user", User);
+addIcon("role", Role);
