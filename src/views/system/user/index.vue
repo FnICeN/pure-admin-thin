@@ -3,6 +3,8 @@ import { ref } from "vue";
 import { useUser } from "./hook";
 import { PureTableBar } from "@/components/RePureTableBar";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import changeForm from "./changeForm.vue";
+import addForm from "./addForm.vue";
 
 import Role from "@iconify-icons/ri/admin-line";
 import Password from "@iconify-icons/ri/lock-password-line";
@@ -27,12 +29,22 @@ const {
   buttonClass,
   onSearch,
   resetForm,
+  addUser,
+  deleteUser,
   handleUpdate,
-  handleDelete,
   handleSizeChange,
   handleCurrentChange,
   handleSelectionChange
 } = useUser();
+
+const changeFormVisible = ref(false);
+const addFormVisible = ref(false);
+const selectUser = ref();
+
+// const addNewUser = (user: Object) => {
+//   console.log(user);
+//   addUser(user);
+// };
 </script>
 
 <template>
@@ -86,12 +98,21 @@ const {
         </el-form-item>
       </el-form>
 
+      <changeForm v-model:visible="changeFormVisible" :now-user="selectUser" />
+
+      <addForm v-model:visible="addFormVisible" @new-user-data="addUser" />
+
       <PureTableBar title="用户管理" @refresh="onSearch">
         <template #buttons>
-          <el-button type="primary" :icon="useRenderIcon(AddFill)">
+          <el-button
+            type="primary"
+            :icon="useRenderIcon(AddFill)"
+            @click="addFormVisible = true"
+          >
             新增用户
           </el-button>
         </template>
+
         <template v-slot="{ size, checkList }">
           <pure-table
             border
@@ -118,12 +139,18 @@ const {
                 link
                 type="primary"
                 :size="size"
-                @click="handleUpdate(row)"
+                @click="
+                  changeFormVisible = true;
+                  selectUser = row;
+                "
                 :icon="useRenderIcon(EditPen)"
               >
                 修改
               </el-button>
-              <el-popconfirm title="是否确认删除?">
+              <el-popconfirm
+                title="是否确认删除?"
+                @confirm="deleteUser(selectUser)"
+              >
                 <template #reference>
                   <el-button
                     class="reset-margin"
@@ -131,7 +158,7 @@ const {
                     type="primary"
                     :size="size"
                     :icon="useRenderIcon(Delete)"
-                    @click="handleDelete(row)"
+                    @click="selectUser = row"
                   >
                     删除
                   </el-button>

@@ -155,8 +155,16 @@ export function useUser() {
     console.log(row);
   }
 
-  function handleDelete(row) {
-    console.log(row);
+  function addUser(user) {
+    console.log("addUser");
+    dataList.value.push(user);
+    pagination.total++;
+    console.log(data.list);
+  }
+
+  function deleteUser(user) {
+    const index = dataList.value.indexOf(user);
+    dataList.value.splice(index);
   }
 
   function handleSizeChange(val: number) {
@@ -199,8 +207,9 @@ export function useUser() {
     buttonClass,
     onSearch,
     resetForm,
+    addUser,
+    deleteUser,
     handleUpdate,
-    handleDelete,
     handleSizeChange,
     handleCurrentChange,
     handleSelectionChange

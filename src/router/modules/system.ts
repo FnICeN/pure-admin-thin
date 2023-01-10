@@ -9,7 +9,7 @@ export default {
   children: [
     {
       path: "/system/user",
-      name: "UserControll",
+      name: "User",
       component: () => import("@/views/system/user/index.vue"),
       meta: {
         icon: "user",
@@ -18,7 +18,7 @@ export default {
     },
     {
       path: "/system/role",
-      name: "RoleControll",
+      name: "Role",
       component: () => import("@/views/system/role/index.vue"),
       meta: {
         icon: "role",
