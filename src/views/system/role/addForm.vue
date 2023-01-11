@@ -15,34 +15,42 @@ const closeDialog = () => {
 
 const submitForm = async () => {
   console.log("submit");
-  const temp = user.value;
+  const temp = role.value;
   emit("newUserData", temp);
   //重置信息
-  user.value = {
-    username: "",
-    nickname: "",
-    remark: "管理员",
-    deptId: 103,
-    postIds: [1],
-    mobile: "",
-    sex: 0,
+  role.value = {
+    creator: "admin",
+    updater: "",
+    deleted: false,
+    tenantId: 1,
     id: null,
-    status: 0
+    name: "",
+    code: "",
+    sort: 1,
+    status: 0,
+    type: 1,
+    remark: "",
+    dataScope: 1,
+    dataScopeDeptIds: null
   };
   formVisible.value = false;
 };
 
 const formVisible = ref(false);
-const user = ref({
-  username: "",
-  nickname: "",
-  remark: "管理员",
-  deptId: 103,
-  postIds: [1],
-  mobile: "",
-  sex: 0,
+const role = ref({
+  creator: "admin",
+  updater: "",
+  deleted: false,
+  tenantId: 1,
   id: null,
-  status: 0
+  name: "",
+  code: "",
+  sort: 1,
+  status: 0,
+  type: 1,
+  remark: "",
+  dataScope: 1,
+  dataScopeDeptIds: null
 });
 
 const emit = defineEmits(["update:visible", "newUserData"]);
@@ -63,29 +71,26 @@ watch(
 
 <template>
   <div>
-    <el-dialog v-model="formVisible" title="编辑新增用户信息" draggable>
-      <el-form :model="user">
-        <el-form-item label="用户编号">
-          <el-input v-model="user.id" />
+    <el-dialog v-model="formVisible" title="编辑新增角色信息" draggable>
+      <el-form :model="role">
+        <el-form-item label="角色编号：">
+          <el-input v-model="role.id" />
         </el-form-item>
-        <el-form-item label="用户名称">
-          <el-input v-model="user.username" />
+        <el-form-item label="角色名称：">
+          <el-input v-model="role.name" />
         </el-form-item>
-        <el-form-item label="用户昵称">
-          <el-input v-model="user.nickname" />
+        <el-form-item label="角色标识：">
+          <el-input v-model="role.code" />
         </el-form-item>
-        <el-form-item label="性别">
-          <el-radio-group v-model="user.sex">
-            <el-radio-button :label="0">男</el-radio-button>
-            <el-radio-button :label="1">女</el-radio-button>
+        <el-form-item label="角色类型：">
+          <el-radio-group v-model="role.type">
+            <el-radio-button :label="2">自定义</el-radio-button>
+            <el-radio-button :label="1">内置</el-radio-button>
           </el-radio-group>
-        </el-form-item>
-        <el-form-item label="手机号码：">
-          <el-input v-model="user.mobile" />
         </el-form-item>
         <el-form-item label="状态：">
           <el-switch
-            v-model="user.status"
+            v-model="role.status"
             :active-value="1"
             :inactive-value="0"
             active-text="已开启"

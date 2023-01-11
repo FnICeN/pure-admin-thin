@@ -3,6 +3,8 @@ import { ref } from "vue";
 import { useRole } from "./hook";
 import { PureTableBar } from "@/components/RePureTableBar";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+import changeForm from "./changeForm.vue";
+import addForm from "./addForm.vue";
 
 import Database from "@iconify-icons/ri/database-2-line";
 import More from "@iconify-icons/ep/more-filled";
@@ -27,12 +29,17 @@ const {
   buttonClass,
   onSearch,
   resetForm,
+  addRole,
+  deleteRole,
   handleUpdate,
-  handleDelete,
   handleSizeChange,
   handleCurrentChange,
   handleSelectionChange
 } = useRole();
+
+const changeFormVisible = ref(false);
+const addFormVisible = ref(false);
+const selectRole = ref();
 </script>
 
 <template>
@@ -66,8 +73,8 @@ const {
           clearable
           class="!w-[180px]"
         >
-          <el-option label="已开启" value="1" />
-          <el-option label="已关闭" value="0" />
+          <el-option label="已开启" :value="1" />
+          <el-option label="已关闭" :value="0" />
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -85,9 +92,17 @@ const {
       </el-form-item>
     </el-form>
 
+    <changeForm v-model:visible="changeFormVisible" :now-role="selectRole" />
+
+    <addForm v-model:visible="addFormVisible" @new-user-data="addRole" />
+
     <PureTableBar title="角色列表" @refresh="onSearch">
       <template #buttons>
-        <el-button type="primary" :icon="useRenderIcon(AddFill)">
+        <el-button
+          type="primary"
+          :icon="useRenderIcon(AddFill)"
+          @click="addFormVisible = true"
+        >
           新增角色
         </el-button>
       </template>
@@ -119,11 +134,17 @@ const {
               type="primary"
               :size="size"
               :icon="useRenderIcon(EditPen)"
-              @click="handleUpdate(row)"
+              @click="
+                changeFormVisible = true;
+                selectRole = row;
+              "
             >
               修改
             </el-button>
-            <el-popconfirm title="是否确认删除?">
+            <el-popconfirm
+              title="是否确认删除?"
+              @confirm="deleteRole(selectRole)"
+            >
               <template #reference>
                 <el-button
                   class="reset-margin"
@@ -131,7 +152,7 @@ const {
                   type="primary"
                   :size="size"
                   :icon="useRenderIcon(Delete)"
-                  @click="handleDelete(row)"
+                  @click="selectRole = row"
                 >
                   删除
                 </el-button>

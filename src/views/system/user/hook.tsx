@@ -9,7 +9,7 @@ export function useUser() {
   const form = reactive({
     username: "",
     mobile: "",
-    status: ""
+    status: null
   });
   const dataList = ref([]);
   const loading = ref(true);
@@ -164,7 +164,7 @@ export function useUser() {
 
   function deleteUser(user) {
     const index = dataList.value.indexOf(user);
-    dataList.value.splice(index);
+    dataList.value.splice(index, 1);
   }
 
   function handleSizeChange(val: number) {
@@ -181,8 +181,14 @@ export function useUser() {
 
   async function onSearch() {
     loading.value = true;
-    dataList.value = data.list;
-    pagination.total = data.total;
+    dataList.value = data.list
+      .filter(user => user.username.includes(form.username))
+      .filter(user => user.mobile.includes(form.mobile));
+    if (form.status != null)
+      dataList.value = dataList.value.filter(
+        user => user.status == form.status
+      );
+    pagination.total = dataList.value.length;
     setTimeout(() => {
       loading.value = false;
     }, 500);

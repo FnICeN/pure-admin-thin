@@ -40,11 +40,6 @@ const {
 const changeFormVisible = ref(false);
 const addFormVisible = ref(false);
 const selectUser = ref();
-
-// const addNewUser = (user: Object) => {
-//   console.log(user);
-//   addUser(user);
-// };
 </script>
 
 <template>
@@ -79,8 +74,8 @@ const selectUser = ref();
             clearable
             class="!w-[160px]"
           >
-            <el-option label="已开启" value="1" />
-            <el-option label="已关闭" value="0" />
+            <el-option label="已开启" :value="1" />
+            <el-option label="已关闭" :value="0" />
           </el-select>
         </el-form-item>
         <el-form-item>

@@ -9,7 +9,7 @@ export function useRole() {
   const form = reactive({
     name: "",
     code: "",
-    status: ""
+    status: null
   });
   const dataList = ref([]);
   const loading = ref(true);
@@ -61,11 +61,6 @@ export function useRole() {
           {row.type === 1 ? "内置" : "自定义"}
         </el-tag>
       )
-    },
-    {
-      label: "显示顺序",
-      prop: "sort",
-      minWidth: 100
     },
     {
       label: "状态",
@@ -154,8 +149,16 @@ export function useRole() {
     console.log(row);
   }
 
-  function handleDelete(row) {
-    console.log(row);
+  function addRole(role) {
+    console.log("addRole");
+    dataList.value.push(role);
+    pagination.total++;
+    console.log(roles.list);
+  }
+
+  function deleteRole(role) {
+    const index = dataList.value.indexOf(role);
+    dataList.value.splice(index, 1);
   }
 
   function handleSizeChange(val: number) {
@@ -172,7 +175,13 @@ export function useRole() {
 
   async function onSearch() {
     loading.value = true;
-    dataList.value = roles.list;
+    dataList.value = roles.list
+      .filter(role => role.name.includes(form.name))
+      .filter(role => role.code.includes(form.code));
+    if (form.status != null)
+      dataList.value = dataList.value.filter(
+        role => role.status == form.status
+      );
     pagination.total = roles.total;
     setTimeout(() => {
       loading.value = false;
@@ -198,8 +207,9 @@ export function useRole() {
     buttonClass,
     onSearch,
     resetForm,
+    addRole,
+    deleteRole,
     handleUpdate,
-    handleDelete,
     handleSizeChange,
     handleCurrentChange,
     handleSelectionChange
