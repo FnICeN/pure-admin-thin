@@ -15,7 +15,7 @@ defineOptions({
         <el-card class="box-card" style="margin-top: 10px; height: 480px">
           <template #header>
             <div class="clearfix text">
-              <span>舆情数据</span>
+              <span>近期舆情数据</span>
             </div>
           </template>
           <Tab />
