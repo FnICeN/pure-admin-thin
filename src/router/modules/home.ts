@@ -14,7 +14,6 @@ export default {
     {
       path: "/welcome",
       name: "Data-view",
-      // component: () => import("@/views/welcome/index.vue"),
       component: () => import("@/views/data-view/index.vue"),
       meta: {
         title: "首页"

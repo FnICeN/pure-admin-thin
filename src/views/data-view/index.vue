@@ -2,6 +2,7 @@
 import Pie from "../data-view/pie.vue";
 import Line from "../data-view/line.vue";
 import Tab from "../data-view/table.vue";
+import DateLine from "./dateLine.vue";
 defineOptions({
   name: "Data-view"
 });
@@ -22,7 +23,7 @@ defineOptions({
       </el-col>
     </el-row>
     <el-row :gutter="20">
-      <el-col :span="12">
+      <el-col :span="8">
         <div class="grid-content bg-purple">
           <el-card class="box-card">
             <!-- eslint-disable-next-line -->
@@ -37,7 +38,7 @@ defineOptions({
           </el-card>
         </div>
       </el-col>
-      <el-col :span="12">
+      <el-col :span="8">
         <div class="grid-content bg-purple">
           <el-card class="box-card">
             <!-- eslint-disable-next-line -->
@@ -52,6 +53,21 @@ defineOptions({
           </el-card>
         </div>
       </el-col>
+      <el-col :span="8">
+        <div class="grid-content bg-purple">
+          <el-card class="box-card">
+            <!-- eslint-disable-next-line -->
+            <template #header>
+              <div class="clearfix text">
+                <span>发布日期分布</span>
+              </div>
+            </template>
+            <div class="item">
+              <DateLine />
+            </div>
+          </el-card>
+        </div>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -59,6 +75,7 @@ defineOptions({
 <style scoped>
 .text {
   font-size: 20px;
+  font-weight: 600;
 }
 
 .item {

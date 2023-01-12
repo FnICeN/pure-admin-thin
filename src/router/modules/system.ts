@@ -4,7 +4,7 @@ export default {
   meta: {
     icon: "setting",
     title: "系统管理",
-    rank: 10
+    rank: 11
   },
   children: [
     {
