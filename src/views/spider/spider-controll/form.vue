@@ -158,7 +158,7 @@ const onCancel = () => {
         clearable
       />
     </el-form-item>
-    <el-form-item label="博文时限" style="width: 55%">
+    <el-form-item label="博文时限" style="width: 65%">
       <el-date-picker
         v-model="tempdate"
         type="daterange"

@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { ReNormalCountTo } from "@/components/ReCountTo";
+import { getSpiderData } from "@/api/spiderdata";
 
 const data = ref({
-  job: "小镇做题家",
-  get: 1000,
-  analyse: 900,
-  pos: 677,
-  neg: 223
+  job: "",
+  get: 0,
+  analyse: 0,
+  pos: 0,
+  neg: 0
+});
+
+onMounted(async () => {
+  const result = await getSpiderData();
+  data.value = result;
 });
 </script>
 
