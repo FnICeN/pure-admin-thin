@@ -27,7 +27,12 @@ export function getPluginsList(
     configCompressPlugin(VITE_COMPRESSION),
     DefineOptions(),
     // 线上环境删除console
-    removeConsole({ external: ["src/assets/iconfont/iconfont.js"] }),
+    removeConsole({
+      external: [
+        "src/assets/iconfont/iconfont.js",
+        "src/assets/iconfont-bussiness/iconfont.js"
+      ]
+    }),
     viteBuildInfo(),
     // 自定义主题
     themePreprocessorPlugin({

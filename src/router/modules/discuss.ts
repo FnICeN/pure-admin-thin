@@ -32,7 +32,7 @@ export default {
       meta: {
         icon: "search",
         title: "LDA分析",
-        frameSrc: "http://localhost:8848/html/positive.html"
+        frameSrc: "/html/positive.html"
       }
     }
   ]
