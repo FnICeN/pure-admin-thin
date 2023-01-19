@@ -1,12 +1,17 @@
 <script setup lang="ts">
-import { ref, computed, watch, type Ref } from "vue";
+import { ref, computed, watch, onMounted, type Ref } from "vue";
 import { useAppStoreHook } from "@/store/modules/app";
+// import { useData } from "./dataHook";
+import { getAnotherData } from "@/api/homegeneral";
 import {
   delay,
   useDark,
   useECharts,
   type EchartOptions
 } from "@pureadmin/utils";
+
+const dateList = ref([]);
+const eachdaylist = ref([]);
 
 const { isDark } = useDark();
 
@@ -19,49 +24,41 @@ const { setOptions, resize } = useECharts(lineChartRef as Ref<HTMLDivElement>, {
   theme
 });
 
-const data = [
-  ["2023/1/1", 500],
-  ["2023/1/2", 200],
-  ["2023/1/3", 136],
-  ["2023/1/4", 154],
-  ["2023/1/5", 95],
-  ["2023/1/6", 33],
-  ["2023/1/7", 1]
-];
-
-const getDateList = () => {
-  return data.map(function (item) {
-    return item[0];
-  });
-};
-const getPosValueList = () => {
-  return data.map(function (item) {
-    return item[1];
-  });
-};
-
-setOptions({
-  tooltip: {
-    trigger: "axis",
-    axisPointer: { type: "line" }
-  },
-  legend: {},
-  xAxis: {
-    type: "category",
-    data: getDateList(),
-    axisTick: { alignWithLabel: true }
-  },
-  yAxis: {
-    type: "value"
-  },
-  series: [
-    {
-      data: getPosValueList(),
-      type: "line",
-      areaStyle: {},
-      symbol: "none"
+onMounted(async () => {
+  const anotherData = await getAnotherData();
+  //装填dateLineData
+  anotherData.forEach((cur, index) => {
+    if (index) {
+      const yesterday = anotherData[index - 1].neg + anotherData[index - 1].pos;
+      dateList.value.push(cur.date);
+      eachdaylist.value.push(cur.pos + cur.neg - yesterday);
     }
-  ]
+  });
+  console.log("即将进行setOptions");
+  setOptions({
+    tooltip: {
+      trigger: "axis",
+      axisPointer: { type: "line" }
+    },
+    legend: {},
+    xAxis: {
+      type: "category",
+      data: dateList.value,
+      axisTick: { alignWithLabel: true }
+    },
+    yAxis: {
+      type: "value"
+    },
+    series: [
+      {
+        data: eachdaylist.value,
+        type: "line",
+        areaStyle: {},
+        symbol: "none"
+      }
+    ]
+  });
+  console.log("setOptions完成");
 });
 
 watch(

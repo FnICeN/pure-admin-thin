@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, watch, type Ref } from "vue";
+import { ref, computed, watch, onMounted, type Ref } from "vue";
 import { useAppStoreHook } from "@/store/modules/app";
+import { getAnotherData } from "@/api/homegeneral";
 import {
   delay,
   useDark,
@@ -19,13 +20,18 @@ const { setOptions, resize } = useECharts(pieChartRef as Ref<HTMLDivElement>, {
   theme
 });
 
-const data = {
-  pos: 20000,
-  neg: 10000
-};
+const pieData = ref({ pos: 0, neg: 0 });
+onMounted(async () => {
+  const anotherData = await getAnotherData();
+  //装填pieData
+  pieData.value.pos = anotherData.reduce((pre, cur) => {
+    return pre + cur.pos;
+  }, 0);
+  pieData.value.neg = anotherData.reduce((pre, cur) => {
+    return pre + cur.neg;
+  }, 0);
 
-setOptions(
-  {
+  setOptions({
     tooltip: {
       trigger: "item"
     },
@@ -42,10 +48,8 @@ setOptions(
         radius: "80%",
         center: ["40%", "50%"],
         data: [
-          { value: data.pos, name: "积极" },
-          // { value: 66666, name: "banana" },
-          { value: data.neg, name: "消极" }
-          // { value: 1000, name: "orange" }
+          { value: pieData.value.pos, name: "积极" },
+          { value: pieData.value.neg, name: "消极" }
         ],
         emphasis: {
           itemStyle: {
@@ -56,22 +60,8 @@ setOptions(
         }
       }
     ]
-  }
-  // {
-  //   name: "click",
-  //   callback: params => {
-  //     console.log("click", params);
-  //   }
-  // },
-  // // 点击空白处
-  // {
-  //   type: "zrender",
-  //   name: "click",
-  //   callback: params => {
-  //     console.log("点击空白处", params);
-  //   }
-  // }
-);
+  });
+});
 
 watch(
   () => useAppStoreHook().getSidebarStatus,

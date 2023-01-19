@@ -1,51 +1,13 @@
 <script setup lang="ts">
-const tableData = [
-  {
-    date: "2016-05-02",
-    opinion: "正向",
-    text: "舆情内容"
-  },
-  {
-    date: "2016-05-04",
-    opinion: "正向",
-    text: "舆情内容"
-  },
-  {
-    date: "2016-05-01",
-    opinion: "负向",
-    text: "舆情内容"
-  },
-  {
-    date: "2016-05-03",
-    opinion: "负向",
-    text: "舆情内容"
-  },
-  {
-    date: "2016-05-03",
-    opinion: "负向",
-    text: "舆情内容"
-  },
-  {
-    date: "2016-05-03",
-    opinion: "负向",
-    text: "舆情内容"
-  },
-  {
-    date: "2016-05-03",
-    opinion: "负向",
-    text: "舆情内容"
-  },
-  {
-    date: "2016-05-03",
-    opinion: "负向",
-    text: "舆情内容"
-  },
-  {
-    date: "2016-05-03",
-    opinion: "负向",
-    text: "舆情内容"
-  }
-];
+// import { useData } from "./dataHook";
+import { onMounted, ref } from "vue";
+import { getTableData } from "@/api/homegeneral";
+
+const tableDataList = ref([]);
+onMounted(async () => {
+  const tableData = await getTableData();
+  tableDataList.value = tableData;
+});
 
 const columns: TableColumnList = [
   {
@@ -66,7 +28,13 @@ const columns: TableColumnList = [
 </script>
 
 <template>
-  <pure-table :data="tableData" :columns="columns" height="350" stripe border />
+  <pure-table
+    :data="tableDataList"
+    :columns="columns"
+    height="350"
+    stripe
+    border
+  />
 </template>
 
 <style scoped></style>
