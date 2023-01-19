@@ -3,6 +3,8 @@ import { ref } from "vue";
 import { provinceAndCityData, CodeToText } from "element-china-area-data";
 import { subBefore } from "@pureadmin/utils";
 import { formatDate } from "@vueuse/core";
+import { submitConfig } from "@/api/spiderconfig";
+import { message } from "@/utils/message";
 
 const activeName = "";
 
@@ -67,10 +69,13 @@ const removeKeyword = keyword => {
 };
 
 //提交表单时执行
-const onSubmit = () => {
+const onSubmit = async () => {
   toRegions();
 
   console.log(JSON.stringify(spiderSets.value));
+  const res = await submitConfig(spiderSets.value);
+  if (res.success) message("提交成功", { type: "success" });
+  else message("提交失败", { type: "error" });
 
   //regions复位
   spiderSets.value.regions = [];
@@ -130,22 +135,22 @@ const onCancel = () => {
     </el-form-item>
     <el-form-item label="搜索微博类型">
       <el-radio-group v-model="spiderSets.weiboType">
-        <el-radio-button label="0">全部</el-radio-button>
-        <el-radio-button label="1">原创</el-radio-button>
-        <el-radio-button label="2">热门</el-radio-button>
-        <el-radio-button label="3">关注人</el-radio-button>
-        <el-radio-button label="4">认证用户</el-radio-button>
-        <el-radio-button label="5">媒体</el-radio-button>
-        <el-radio-button label="6">观点</el-radio-button>
+        <el-radio-button :label="0">全部</el-radio-button>
+        <el-radio-button :label="1">原创</el-radio-button>
+        <el-radio-button :label="2">热门</el-radio-button>
+        <el-radio-button :label="3">关注人</el-radio-button>
+        <el-radio-button :label="4">认证用户</el-radio-button>
+        <el-radio-button :label="5">媒体</el-radio-button>
+        <el-radio-button :label="6">观点</el-radio-button>
       </el-radio-group>
     </el-form-item>
     <el-form-item label="内容筛选">
       <el-radio-group v-model="spiderSets.contentType">
-        <el-radio-button label="0">全部</el-radio-button>
-        <el-radio-button label="1">图片</el-radio-button>
-        <el-radio-button label="2">视频</el-radio-button>
-        <el-radio-button label="3">音乐</el-radio-button>
-        <el-radio-button label="4">短链接</el-radio-button>
+        <el-radio-button :label="0">全部</el-radio-button>
+        <el-radio-button :label="1">图片</el-radio-button>
+        <el-radio-button :label="2">视频</el-radio-button>
+        <el-radio-button :label="3">音乐</el-radio-button>
+        <el-radio-button :label="4">短链接</el-radio-button>
       </el-radio-group>
     </el-form-item>
     <el-form-item label="地区筛选">
