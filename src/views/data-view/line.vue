@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, type Ref } from "vue";
+import { ref, computed, watch, type Ref } from "vue";
 import { useAppStoreHook } from "@/store/modules/app";
-import { getAnotherData } from "@/api/homegeneral";
 import {
   delay,
   useDark,
@@ -20,32 +19,32 @@ const { setOptions, resize } = useECharts(lineChartRef as Ref<HTMLDivElement>, {
   theme
 });
 
-// const { setOptions, resize, getOption, getInstance } = useECharts(lineChartRef as Ref<HTMLDivElement>, {
-//   theme
-// });
+const anotherData = ref([]);
 
-const data = ref([]);
+const props = defineProps({
+  anotherData: {
+    type: Array<any>,
+    default: null
+  }
+});
 
-onMounted(async () => {
-  const anotherData = await getAnotherData();
-  anotherData.forEach(cur => {
-    data.value.push([cur.date, cur.pos, cur.neg]);
+const dateList = computed(() => {
+  return anotherData.value.map(item => {
+    return item.date;
   });
-  const getDateList = () => {
-    return data.value.map(function (item) {
-      return item[0];
-    });
-  };
-  const getPosValueList = () => {
-    return data.value.map(function (item) {
-      return item[1];
-    });
-  };
-  const getNegValueList = () => {
-    return data.value.map(function (item) {
-      return item[2];
-    });
-  };
+});
+const posList = computed(() => {
+  return anotherData.value.map(item => {
+    return item.pos;
+  });
+});
+const negList = computed(() => {
+  return anotherData.value.map(item => {
+    return item.neg;
+  });
+});
+
+const set = () => {
   setOptions({
     tooltip: {
       trigger: "axis",
@@ -54,7 +53,7 @@ onMounted(async () => {
     legend: {},
     xAxis: {
       type: "category",
-      data: getDateList(),
+      data: dateList.value,
       axisTick: { alignWithLabel: true }
     },
     yAxis: {
@@ -63,32 +62,19 @@ onMounted(async () => {
     series: [
       {
         name: "积极",
-        data: getPosValueList(),
+        data: posList.value,
         type: "line",
         smooth: true
       },
       {
         name: "消极",
-        data: getNegValueList(),
+        data: negList.value,
         type: "line",
         smooth: true
       }
     ]
   });
-});
-
-// const add = () => {
-//   data.push(["2023/1/6", 288, 67])
-//   var option = getOption()
-//   option.xAxis = {
-//     type: "category",
-//     data: getDateList(),
-//     axisTick: { alignWithLabel: true }
-//   }
-//   option.series[0].data = getPosValueList()
-//   option.series[1].data = getNegValueList()
-//   getInstance().setOption(option, true)
-// }
+};
 
 watch(
   () => useAppStoreHook().getSidebarStatus,
@@ -96,12 +82,19 @@ watch(
     delay(360).then(() => resize());
   }
 );
+
+watch(
+  () => props.anotherData,
+  val => {
+    anotherData.value = val;
+    set();
+  }
+);
 </script>
 
 <template>
   <div>
     <div ref="lineChartRef" style="width: 100%; height: 35vh" />
-    <!-- <button @click="add">clickme</button> -->
   </div>
 </template>
 

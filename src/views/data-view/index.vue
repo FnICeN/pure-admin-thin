@@ -1,10 +1,19 @@
 <script setup lang="ts">
+import { ref, onBeforeMount } from "vue";
 import Pie from "../data-view/pie.vue";
 import Line from "../data-view/line.vue";
 import Tab from "../data-view/table.vue";
 import DateLine from "./dateLine.vue";
+import { getTableData, getAnotherData } from "@/api/homegeneral";
 defineOptions({
   name: "Data-view"
+});
+
+const anotherData = ref([]);
+const tableData = ref([]);
+onBeforeMount(async () => {
+  anotherData.value = await getAnotherData();
+  tableData.value = await getTableData();
 });
 </script>
 
@@ -18,7 +27,7 @@ defineOptions({
               <span>近期舆情数据</span>
             </div>
           </template>
-          <Tab />
+          <Tab :table-data="tableData" />
         </el-card>
       </el-col>
     </el-row>
@@ -33,7 +42,7 @@ defineOptions({
               </div>
             </template>
             <div class="item">
-              <Pie />
+              <Pie :another-data="anotherData" />
             </div>
           </el-card>
         </div>
@@ -48,7 +57,7 @@ defineOptions({
               </div>
             </template>
             <div class="item">
-              <Line />
+              <Line :another-data="anotherData" />
             </div>
           </el-card>
         </div>
@@ -63,7 +72,7 @@ defineOptions({
               </div>
             </template>
             <div class="item">
-              <DateLine />
+              <DateLine :another-data="anotherData" />
             </div>
           </el-card>
         </div>

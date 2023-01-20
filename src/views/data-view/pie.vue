@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, type Ref } from "vue";
+import { ref, computed, watch, type Ref } from "vue";
 import { useAppStoreHook } from "@/store/modules/app";
-import { getAnotherData } from "@/api/homegeneral";
 import {
   delay,
   useDark,
@@ -9,6 +8,13 @@ import {
   type EchartOptions
 } from "@pureadmin/utils";
 
+const props = defineProps({
+  anotherData: {
+    type: Array<any>,
+    default: null
+  }
+});
+const anotherData = ref([]);
 const { isDark } = useDark();
 
 const theme: EchartOptions["theme"] = computed(() => {
@@ -20,17 +26,22 @@ const { setOptions, resize } = useECharts(pieChartRef as Ref<HTMLDivElement>, {
   theme
 });
 
-const pieData = ref({ pos: 0, neg: 0 });
-onMounted(async () => {
-  const anotherData = await getAnotherData();
-  //装填pieData
-  pieData.value.pos = anotherData.reduce((pre, cur) => {
-    return pre + cur.pos;
-  }, 0);
-  pieData.value.neg = anotherData.reduce((pre, cur) => {
-    return pre + cur.neg;
-  }, 0);
+// const pieData = ref({ pos: 0, neg: 0 });
 
+// console.log(anotherData);
+//装填pieData
+const pieData = computed(() => {
+  return {
+    pos: anotherData.value.reduce((pre, cur) => {
+      return pre + cur.pos;
+    }, 0),
+    neg: anotherData.value.reduce((pre, cur) => {
+      return pre + cur.neg;
+    }, 0)
+  };
+});
+
+const set = () => {
   setOptions({
     tooltip: {
       trigger: "item"
@@ -61,7 +72,7 @@ onMounted(async () => {
       }
     ]
   });
-});
+};
 
 watch(
   () => useAppStoreHook().getSidebarStatus,
@@ -69,8 +80,16 @@ watch(
     delay(360).then(() => resize());
   }
 );
+
+watch(
+  () => props.anotherData,
+  val => {
+    anotherData.value = val;
+    set();
+  }
+);
 </script>
 
 <template>
-  <div ref="pieChartRef" style="width: 100%; height: 35vh" />
+  <div ref="pieChartRef" style="width: 100%; height: 35vh; margin-left: 5px" />
 </template>

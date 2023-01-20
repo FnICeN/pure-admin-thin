@@ -1,13 +1,21 @@
 <script setup lang="ts">
-// import { useData } from "./dataHook";
-import { onMounted, ref } from "vue";
-import { getTableData } from "@/api/homegeneral";
+import { ref, watch } from "vue";
+
+const props = defineProps({
+  tableData: {
+    type: Array<any>,
+    default: null
+  }
+});
 
 const tableDataList = ref([]);
-onMounted(async () => {
-  const tableData = await getTableData();
-  tableDataList.value = tableData;
-});
+
+watch(
+  () => props.tableData,
+  val => {
+    tableDataList.value = val;
+  }
+);
 
 const columns: TableColumnList = [
   {
