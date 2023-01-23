@@ -52,6 +52,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       exclude
     },
     build: {
+      target: ["edge90", "chrome90", "firefox90", "safari15"],
       sourcemap: false,
       // 消除打包大小超过500kb警告
       chunkSizeWarningLimit: 4000,
