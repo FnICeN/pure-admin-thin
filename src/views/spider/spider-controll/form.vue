@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, defineEmits } from "vue";
 import { provinceAndCityData, CodeToText } from "element-china-area-data";
 import { subBefore } from "@pureadmin/utils";
 import { formatDate } from "@vueuse/core";
@@ -7,6 +7,7 @@ import { submitConfig } from "@/api/spiderconfig";
 import { message } from "@/utils/message";
 
 const activeName = "";
+const emit = defineEmits(["freshRun"]);
 
 const spiderSets = ref({
   keywords: [{ value: "", key: Date.now() }],
@@ -74,8 +75,10 @@ const onSubmit = async () => {
 
   console.log(JSON.stringify(spiderSets.value));
   const res = await submitConfig(spiderSets.value);
-  if (res.success) message("提交成功", { type: "success" });
-  else message("提交失败", { type: "error" });
+  if (res.success) {
+    emit("freshRun", { success: true });
+    message("提交成功", { type: "success" });
+  } else message("提交失败", { type: "error" });
 
   //regions复位
   spiderSets.value.regions = [];

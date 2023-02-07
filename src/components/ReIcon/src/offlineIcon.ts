@@ -16,6 +16,7 @@ import Flag from "@iconify-icons/ep/flag";
 import Refrigerator from "@iconify-icons/ep/refrigerator";
 import Search from "@iconify-icons/ep/search";
 import Setup from "@iconify-icons/ep/set-up";
+import History from "@iconify-icons/ep/files";
 import User from "@iconify-icons/ep/user";
 import Role from "@iconify-icons/ri/admin-fill";
 
@@ -30,5 +31,6 @@ addIcon("flag", Flag);
 addIcon("friger", Refrigerator);
 addIcon("search", Search);
 addIcon("setup", Setup);
+addIcon("history", History);
 addIcon("user", User);
 addIcon("role", Role);

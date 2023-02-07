@@ -69,5 +69,19 @@ export default [
           success: false
         };
     }
+  },
+  {
+    url: "/runningOrNot",
+    method: "get",
+    response: () => {
+      return { success: false };
+    }
+  },
+  {
+    url: "/stopSpiderNow",
+    method: "get",
+    response: () => {
+      return { success: true };
+    }
   }
 ] as MockMethod[];

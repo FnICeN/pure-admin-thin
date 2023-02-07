@@ -8,6 +8,15 @@ export default {
   },
   children: [
     {
+      path: "/system/history",
+      name: "History",
+      component: () => import("@/views/system/history/index.vue"),
+      meta: {
+        icon: "history",
+        title: "历史记录管理"
+      }
+    },
+    {
       path: "/system/user",
       name: "User",
       component: () => import("@/views/system/user/index.vue"),

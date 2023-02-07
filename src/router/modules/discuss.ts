@@ -1,4 +1,3 @@
-const IFrame = () => import("@/layout/frameView.vue");
 export default {
   path: "/discuss",
   redirect: "/discuss/LDA",
@@ -26,13 +25,21 @@ export default {
         title: "当前话题数据"
       }
     },
+    // {
+    //   path: "/discuss/LDA",
+    //   component: IFrame,
+    //   meta: {
+    //     icon: "search",
+    //     title: "LDA分析",
+    //     frameSrc: "/html/positive.html"
+    //   }
+    // },
     {
       path: "/discuss/LDA",
-      component: IFrame,
+      component: () => import("@/views/discuss/lda/index.vue"),
       meta: {
         icon: "search",
-        title: "LDA分析",
-        frameSrc: "/html/positive.html"
+        title: "主题分析（LDA）"
       }
     }
   ]

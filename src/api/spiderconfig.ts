@@ -1,10 +1,17 @@
 import { http } from "@/utils/http";
 
-export type SubmitSpiderConfigResult = {
+type Res = {
   success: boolean;
 };
+
 export const submitConfig = (data: Object) => {
-  return http.request<SubmitSpiderConfigResult>("post", "/submitConf", {
+  return http.request<Res>("post", "/submitConf", {
     data
   });
+};
+export const getRunning = () => {
+  return http.request<Res>("get", "/runningOrNot");
+};
+export const stopSpider = () => {
+  return http.request<Res>("get", "/stopSpiderNow");
 };
