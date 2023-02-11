@@ -23,8 +23,8 @@ onBeforeMount(async () => {
       <el-col :span="24">
         <el-card class="box-card" style="margin-top: 10px; height: 480px">
           <template #header>
-            <div class="clearfix text">
-              <span>近期舆情数据</span>
+            <div class="clearfix">
+              <span class="font-semibold text-xl">近期舆情数据</span>
             </div>
           </template>
           <Tab :table-data="tableData" />
@@ -37,11 +37,11 @@ onBeforeMount(async () => {
           <el-card class="box-card">
             <!-- eslint-disable-next-line -->
             <template #header>
-              <div class="clearfix text">
-                <span>舆情综合比例</span>
+              <div class="clearfix">
+                <span class="font-semibold text-xl">舆情综合比例</span>
               </div>
             </template>
-            <div class="item">
+            <div class="mb-5">
               <Pie :another-data="anotherData" />
             </div>
           </el-card>
@@ -52,11 +52,11 @@ onBeforeMount(async () => {
           <el-card class="box-card">
             <!-- eslint-disable-next-line -->
             <template #header>
-              <div class="clearfix text">
-                <span>舆情综合走向</span>
+              <div class="clearfix">
+                <span class="font-semibold text-xl">舆情综合走向</span>
               </div>
             </template>
-            <div class="item">
+            <div class="mb-5">
               <Line :another-data="anotherData" />
             </div>
           </el-card>
@@ -67,11 +67,11 @@ onBeforeMount(async () => {
           <el-card class="box-card">
             <!-- eslint-disable-next-line -->
             <template #header>
-              <div class="clearfix text">
-                <span>发布日期分布</span>
+              <div class="clearfix">
+                <span class="font-semibold text-xl">发布日期分布</span>
               </div>
             </template>
-            <div class="item">
+            <div class="mb-5">
               <DateLine :another-data="anotherData" />
             </div>
           </el-card>
@@ -82,15 +82,6 @@ onBeforeMount(async () => {
 </template>
 
 <style scoped>
-.text {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.item {
-  margin-bottom: 18px;
-}
-
 .clearfix:before,
 .clearfix:after {
   display: table;

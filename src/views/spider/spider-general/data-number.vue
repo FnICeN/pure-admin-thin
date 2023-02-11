@@ -20,15 +20,15 @@ onMounted(async () => {
 <template>
   <el-row type="flex" align="middle">
     <el-col :span="12">
-      <p class="text">当前监测任务</p>
+      <p class="text-2xl">当前监测任务</p>
     </el-col>
     <el-col :span="12">
-      <p class="text">【{{ data.job }}】</p>
+      <p class="text-2xl">【{{ data.job }}】</p>
     </el-col>
   </el-row>
   <el-row type="flex" align="middle">
     <el-col :span="12">
-      <p class="text">已爬取舆情总数</p>
+      <p class="text-2xl">已爬取舆情总数</p>
     </el-col>
     <el-col :span="12">
       <ReNormalCountTo
@@ -42,7 +42,7 @@ onMounted(async () => {
   </el-row>
   <el-row type="flex" align="middle">
     <el-col :span="12">
-      <p class="text">已分析舆情总数</p>
+      <p class="text-2xl">已分析舆情总数</p>
     </el-col>
     <el-col :span="12">
       <ReNormalCountTo
@@ -56,7 +56,7 @@ onMounted(async () => {
   </el-row>
   <el-row type="flex" align="middle">
     <el-col :span="12">
-      <p class="text">正向总数</p>
+      <p class="text-2xl">正向总数</p>
     </el-col>
     <el-col :span="12">
       <ReNormalCountTo
@@ -70,7 +70,7 @@ onMounted(async () => {
   </el-row>
   <el-row type="flex" align="middle">
     <el-col :span="12">
-      <p class="text">负向总数</p>
+      <p class="text-2xl">负向总数</p>
     </el-col>
     <el-col :span="12">
       <ReNormalCountTo
@@ -85,10 +85,6 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.text {
-  font-size: 25px;
-}
-
 .el-col {
   text-align: center;
 }

@@ -39,7 +39,7 @@ const freshRun = obj => {
   <div>
     <el-card class="box-card">
       <template #header>
-        <div class="clearfix text">
+        <div class="clearfix text-xl">
           <span>爬虫参数管理</span>
           <el-button
             v-loading.fullscreen.lock="fullscreenLoading"
@@ -59,14 +59,6 @@ const freshRun = obj => {
 </template>
 
 <style scoped>
-.text {
-  font-size: 20px;
-}
-
-.item {
-  margin-bottom: 18px;
-}
-
 .clearfix:before,
 .clearfix:after {
   display: table;

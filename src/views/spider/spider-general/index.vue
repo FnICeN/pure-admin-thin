@@ -12,7 +12,7 @@ defineOptions({
     <!-- <FontIcon icon="icon-shuju" svg style="width: 50px; height: 50px" /> -->
     <el-card class="box-card">
       <template #header>
-        <div class="clearfix text">
+        <div class="clearfix text-xl">
           <span>爬虫信息总览</span>
         </div>
       </template>
@@ -37,14 +37,6 @@ defineOptions({
 .row-bg {
   padding: 10px 0;
   background-color: #f9fafc;
-}
-
-.text {
-  font-size: 20px;
-}
-
-.item {
-  margin-bottom: 18px;
 }
 
 .clearfix:before,
