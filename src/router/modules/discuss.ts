@@ -38,7 +38,7 @@ export default {
       path: "/discuss/LDA",
       component: () => import("@/views/discuss/lda/index.vue"),
       meta: {
-        icon: "search",
+        icon: "tag",
         title: "主题分析（LDA）"
       }
     }

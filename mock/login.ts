@@ -18,6 +18,17 @@ export default [
             expires: "2023/10/30 00:00:00"
           }
         };
+      } else if (body.username === "plus") {
+        return {
+          success: true,
+          data: {
+            username: "plus",
+            roles: ["plus"],
+            accessToken: "eyJhbGciOiJIUzUxMiJ9.plus",
+            refreshToken: "eyJhbGciOiJIUzUxMiJ9.plusRefresh",
+            expires: "2023/10/30 00:00:00"
+          }
+        };
       } else {
         return {
           success: true,

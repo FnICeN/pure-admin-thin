@@ -22,7 +22,8 @@ export default {
       component: () => import("@/views/system/user/index.vue"),
       meta: {
         icon: "user",
-        title: "用户管理"
+        title: "用户管理",
+        roles: ["admin"]
       }
     },
     {
@@ -31,7 +32,8 @@ export default {
       component: () => import("@/views/system/role/index.vue"),
       meta: {
         icon: "role",
-        title: "角色管理"
+        title: "角色管理",
+        roles: ["admin"]
       }
     }
   ]
